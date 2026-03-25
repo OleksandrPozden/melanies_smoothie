@@ -27,14 +27,13 @@ ingredients = st.multiselect(
     my_dataframe,
     max_selections=5,
 )
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")  
-st.text(smoothiefroot_response.status_code)
-st_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
 if ingredients:
     ingredients_string = ''
     for ingredient in ingredients:
         ingredients_string += ingredient + ' '
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")  
+        st_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)  
     #st.text(ingredients_string)
     
     my_insert_stmt = """ insert into smoothies.public.orders(name_on_order, ingredients)
